@@ -1,17 +1,11 @@
 myApp.factory('Auth', function($q, $rootScope, Session, API) {
 
     var login = function(credential) {
-        var defer = $q.defer();
-        API.request('/login', credential).then(function(data) {
-            Session.put('authorized', angular.toJson(data.data.data)).then(function() {
-                defer.resolve(true)
-            });
-        });
-
-        return defer.promise;
+        return API.request('/login', credential);
     }
 
     var isLoggedIn = function() {
+
         var defer = $q.defer();
 
         var todo = Session.get('authorized');
@@ -20,13 +14,23 @@ myApp.factory('Auth', function($q, $rootScope, Session, API) {
         return defer.promise;
     }
 
+    var getToken = function() {
+        var defer = $q.defer();
+        API.getTocken('/token', '').then(function(data) {
+            Session.put('authorized', angular.toJson(data.data.data)).then(function() {
+                defer.resolve(true)
+            });
+        });
 
+        return defer.promise;
+    }
 
 
 
     return {
         login: login,
-        isLoggedIn: isLoggedIn
+        isLoggedIn: isLoggedIn,
+        getToken: getToken
     }
 
 

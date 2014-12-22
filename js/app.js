@@ -25,18 +25,12 @@ myApp.config(['$routeProvider',
 ]);
 
 
-myApp.run(function($q, $rootScope, $location, $http, $timeout, config, Auth, YDNDBService) {
+myApp.run(function($q, $rootScope, $location, $http, $timeout, config, Auth, YDNDBService, Session) {
 
     $rootScope.$on('$routeChangeStart', function() {
 
         initDb(YDNDBService, config.DB_NAME);
-        routeHandle(Auth);
-        // Checking user has been logged
-        //console.log(config.DB_NAME);
-
-
-
-
+        routeHandle(Auth, Session, $location);
     });
 });
 
@@ -53,31 +47,20 @@ window.initDb = function(YDNDBService, DB_NAME) {
     YDNDBService.init().then(function(scope) {
         scope.createDB(DB_NAME, schema);
     });
-
-
-
-
-
-
-
-
-    //var db = new ydn.db.Storage('system', schema);
-    //$rootScope.ds = db;
 }
 
-window.routeHandle = function(Auth) {
+window.routeHandle = function(Auth, Session, location) {
     var isLoggedIn = Auth.isLoggedIn();
 
-    //console.log(isLoggedIn);
     isLoggedIn.then(function(data) {
-        //console.log(data);
-        if (_.isNull(data)) {
+        if (_.isNull(data) || data == 'undefined') {
+            Auth.getToken();
+        } else {}
+    });
 
-        } else {
-            //console.log(data);
+    Session.get('client').then(function(data) {
+        if (_.isNull(data) || data == 'undefined') {
 
-        }
-
-
+        } else {}
     });
 }

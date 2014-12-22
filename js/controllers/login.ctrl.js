@@ -14,8 +14,14 @@ myApp.controller('LoginCtrl',
         //console.log(config.apipath);
         $scope.login = function() {
             //        alert($scope.credential.username);
-            Auth.login($scope.credential).then(function() {
-                $location.path('/product');
+            Auth.login($scope.credential).then(function(data) {
+                if (data.data.status) {
+                    Session.put('client', angular.toJson(data.data.data));
+                    $location.path('/product');
+                } else {
+                    alert('Username and Password are invalid');
+
+                }
             });
 
         }
