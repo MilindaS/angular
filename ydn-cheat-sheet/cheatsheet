@@ -1,0 +1,19 @@
+ YDNDBService.init().then(function(scope) {
+                 scope.put('product', {
+                     id: 121343,
+                     name: 'milinda'
+                 });
+             });
+            YDNDBService.init().then(function(scope) {
+                scope.get('product', 121343).then(function(data) {
+                    console.log(data.name);
+                });
+            });
+
+            // $rootScope.ds.from('product').list().done(function(data) {
+                //     console.log(data);
+                // });
+
+                $rootScope.ds.values('product').done(function(data) {
+                    console.log(data);
+                });

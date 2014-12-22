@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+	
+	<script src="underscore/underscore.js"></script>
+	<script src="jquery.min.js"></script>
+	<script src="angular/angular.min.js"></script>
+	<script src="moment/moment.js"></script>
+	<script src="rabbit.js"></script>
+	<script src="bootbox.js/bootbox.js"></script>
+	<script src="angular-route/angular-route.min.js"></script>
+	<script src="dist/js/bootstrap.min.js"></script>
+	<script src="dbjs/db.js"></script>
+	<script src="ydn-db-master/jsc/ydn.db-dev.js"></script>
+
+	
+</head>
+<body>
+	<!-- <div ng-controller="TextController">
+		{{student.name}}
+	</div> -->
+	<div ng-include="'tpl/header.html'"></div>
+	<div ng-view></div>
+
+</body>
+</html>
+
+
+<script src="js/app.js"></script>
+<script src="js/modules/config.module.js"></script>
+<script src="js/modules/serialize.module.js"></script>
+
+<script src="js/services/nics.config.module.js"></script>
+<script src="js/services/nics.cipher.module.js"></script>
+<script src="js/services/ydn-db.service.js"></script>
+<script src="js/services/api.service.js"></script>
+<script src="js/services/session.service.js"></script>
+<script src="js/services/auth.service.js"></script>
+<script src="js/services/mdb.service.js"></script>
+<!-- Start Controllers -->
+<script src="js/controllers/home.ctrl.js"></script>
+<script src="js/controllers/product.ctrl.js"></script>
+<script src="js/controllers/contact.ctrl.js"></script>
+<script src="js/controllers/login.ctrl.js"></script>
+<!-- End Controllers-->
+
+
+
+
+
+<!-- Start Services -->
+
+<!-- End Services -->
+
+
