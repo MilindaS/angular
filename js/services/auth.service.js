@@ -21,11 +21,8 @@ myApp.factory('Auth', function($q, $rootScope, Session, API) {
                 defer.resolve(true)
             });
         });
-
         return defer.promise;
     }
-
-
 
     return {
         login: login,

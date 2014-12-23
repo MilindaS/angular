@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'nics.Config', 'nics.Cipher', 'Config', 'n.URI']);
+var myApp = angular.module('myApp', ['ngRoute', 'nics.Config', 'nics.Cipher', 'Config', 'n.URI', 'mgcrea.ngStrap']);
 
 myApp.config(['$routeProvider',
     function($routeProvider) {
@@ -22,19 +22,26 @@ myApp.config(['$routeProvider',
                 redirectTo: 'tpl/404.htm'
             });
     }
+]).config(['$httpProvider',
+    function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        $httpProvider.defaults.headers.post['Content-type'] = 'application/x-www-form-urlencoded';
+    }
 ]);
 
 
-myApp.run(function($q, $rootScope, $location, $http, $timeout, config, Auth, YDNDBService, Session) {
-
+myApp.run(function($q, $rootScope, $location, $http, $timeout, config, Auth, YDNDBService, Session, SyncService) {
+    console.log(1);
     $rootScope.$on('$routeChangeStart', function() {
-
         initDb(YDNDBService, config.DB_NAME);
         routeHandle(Auth, Session, $location);
+        sync(config, SyncService);
+
     });
 });
 
 window.initDb = function(YDNDBService, DB_NAME) {
+
     var schema = {
         stores: [{
             name: 'product',
@@ -63,4 +70,10 @@ window.routeHandle = function(Auth, Session, location) {
 
         } else {}
     });
+}
+
+window.sync = function(config, SyncService) {
+    if (config.DO_SYNC) {
+        SyncService.start();
+    }
 }

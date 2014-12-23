@@ -1,5 +1,5 @@
 myApp.controller('LoginCtrl',
-    function($q, $scope, $rootScope, $location, MDBService, Auth, Session, config) {
+    function($q, $scope, $rootScope, $location, $alert, MDBService, Auth, Session, config) {
         $scope.pageTitle = 'Sign In';
 
         $scope.credential = {
@@ -19,8 +19,14 @@ myApp.controller('LoginCtrl',
                     Session.put('client', angular.toJson(data.data.data));
                     $location.path('/product');
                 } else {
-                    alert('Username and Password are invalid');
-
+                    // var myAlert = $alert({
+                    //     title: '',
+                    //     content: 'Sorry Da, Username nd Password is invalid!',
+                    //     placement: 'top',
+                    //     type: 'info',
+                    //     show: true
+                    // });
+                    bootbox.alert("Username and password is invalid !");
                 }
             });
 
